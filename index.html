@@ -7,353 +7,71 @@
 		<link rel="shortcut icon" href="favicon.ico">
 	</head>
 	<body>
+	
 		<div class="row">
+			
 			<div id="storeFront">
 			</div>
 		</div>
 		<br><br>
+		<div class="row center">
+			<button class="btn lg orange" id="showcart">My Cart</button>
+		</div>
 		<div class="row">
-		<table id="cartTable">
-			<thead>
-				<tr>
-					<th></th>
-					<th>Items</th>
-					<th>Qty.</th>
-					<th>Price</th>
-				</tr>
-			</thead>
-			<tbody id='display'>
-			</tbody>
-			<tbody class="foot" id="foot">
-				<tr>
-					<td>
-						<div class="fr selected" id="selected">
-							Selected
-							<span id="selectedTotal">0</span>&nbsp;items<!--&nbsp;Items
-								<span class="arrow up" >︽</span>
-								<span class="arrow down">︾</span>-->
-						</div>
-					</td>
-					<td>
-						<div class="fr promocode"><input id="promoCode" class="count-promo" type="text" name="promoCode" placeholder="Promo Code"/>
-							<a href="#" id="checkCode" name="checkCode">Go</a>
-						</div>
-					</td>
-					<td>
-					</td>
-					<td>
-						<div class="fr total">Total：<span id="currency"></span> &nbsp;<span id="priceTotal" style="color: #f50">0.00</span></div>
-					</td>
-				</tr>
-				<tr>
-					<td colspan="4">
-						<div id="checkoutBtn" class="fr closing">Check Out</div>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-		<div class="selected-view">
+			<table id="cartTable" class="hidebox">
+					<thead>
+						<tr>
+							<th></th>
+							<th>Items</th>
+							<th>Qty.</th>
+							<th>SubTotal</th>
+						</tr>
+					</thead>
+					<tbody id='display'>
+					</tbody>
+					<tbody class="foot" id="foot">
+						<tr>
+							<td>
+								<div class="fr selected" id="selected">
+									Selected
+									<span id="selectedTotal">0</span>&nbsp;items &nbsp;Items
+										<span class="arrow up" >︽</span>
+										<span class="arrow down">︾</span>
+								</div>
+							</td>
+							<td>
+								<div class="fr promocode"><input id="promoCode" class="count-promo" type="text" name="promoCode" placeholder="Promo Code"/>
+									<a href="#" id="checkCode" name="checkCode">Go</a>
+								</div>
+							</td>
+							<td>
+							</td>
+							<td>
+								<div class="fr total">Total：<span id="currency"></span> &nbsp;<span id="priceTotal" style="color: #f50">0.00</span></div>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="4">
+								<div id="specialBtn" class="fr closing green">Special Offer</div>
+								<div id="checkoutBtn" class="fr closing">Check Out</div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			<div class="modalContainer hidebox" >
+				
+			</div>
+		</div>
+
+			
+		<div class="selected-view" style="display:none;">
 			<table id="selectedViewList" class="clearfix">
 				<!--<div><img src="images/1.jpg"><span></span></div>-->
 			</table>
-			<!-- <span class="arrow">◆<span>◆</span></span>-->
+			 <span class="arrow">◆<span>◆</span></span>
 		</div>
-		<Script>
-			function ShoppingCart (name,pcode,pqty,price) {
-			
-			    this.name = name;
-			    this.pcode = pcode;
-				this.pqty = parseInt(pqty);
-			    this.price = parseInt(price);
-			
-			}
-			 
-			
-			var shop = new ShoppingCart();
-			
-			var totalPrice = [{}];
-			
-			var myObj = [ 
-							{ "p_code":"ult_small", "p_name":"Unlimited 1GB", "p_qty":"1", "p_price":"10.00" },
-							{ "p_code":"ult_medium", "p_name":"Unlimited 2GB", "p_qty":"1", "p_price":"20.00" },
-							{ "p_code":"ult_large", "p_name":"Unlimited 5GB", "p_qty":"1", "p_price":"30.00" },
-							{ "p_code":"1gb", "p_name":"1 GB Data-pack", "p_qty":"1", "p_price":"5.50" },
-						];
-						
-			
-						
-			
-				var cartTable = document.getElementById('cartTable');
-				var checkOutTable = document.getElementById('cart_items')
-				var productTable = document.getElementById('display')
-				var tr = cartTable.children[1].rows;
-				var tr2 = productTable.rows;
-				var currency = '$';
-			  var checkInputs = document.getElementsByClassName('check');
-			    var checkInputs = document.getElementsByClassName('check');
-			    var checkAllInputs = document.getElementsByClassName('check-all check');
-			    var selectedTotal = document.getElementById('selectedTotal');
-			    var priceTotal = document.getElementById('priceTotal');
-			    var selected = document.getElementById('selected');
-			    var codePromo = document.getElementById('promoCode');
-			    var foot = document.getElementById('foot');
-			    var selectedViewList = document.getElementById('selectedViewList');
-			    var deleteThis = document.getElementById('deleteThis');
-			    var deleteAll = document.getElementById('deleteAll');
-			    var checkOut = document.getElementById('checkoutBtn');
-			    var discount = document.getElementById('promoCode');
-			    var chkCode =  document.getElementById('checkCode');
-			  var hasCode = "I<3AMAYSIM"; // hard coded for this demo.
-			            var hasDiscount = 10; // hard coded for this demo.
-			
-			function subTotal(name,code,qty,price){
-			
-			}
-			
-			
-			 
-			    function getTotal() {
-			        var selected = 0;
-			        var price = 0;
-			        var HTMLstr = '';
-			        for (var i = 0, len = tr.length; i < len; i++) {
-			            if (tr[i].getElementsByTagName('input')[0].checked) {
-			                tr[i].className = 'on';
-			                selected += parseInt(tr[i].getElementsByTagName('input')[1].value);
-			                price += parseFloat(tr[i].cells[3].innerHTML);
-			        
-			            }
-			            else {
-			                tr[i].className = '';
-			            }
-			        }
-			            // Discount script 'start'
-			        if (sessionStorage["discountValue"]) {
-			            var decimalValue = sessionStorage.getItem("discountValue"); // whole number = (10)
-			            var discountPercent  = price.toFixed(2) / 100; // decimal of orig price 24.90 = (0.249)
-			            sessionStorage.setItem('discountInPercent', discountPercent.toFixed(2));
-			            selectedTotal.innerHTML = selected;
-			            priceTotal.innerHTML = price.toFixed(2) - discountPercent.toFixed(2);
-			            selectedViewList.innerHTML = HTMLstr;
-			             // Discount script 'end'
-			        }
-			        else {
-			            selectedTotal.innerHTML = selected;
-			            priceTotal.innerHTML = price.toFixed(2);
-			            selectedViewList.innerHTML = HTMLstr;
-			        }
-			        if (selected == 0) {
-			            foot.className = 'foot';
-			        }
-			
-			   console.log(JSON.stringify(shop));
-			      
-			    }
-			 function getSubTotal(tr) {
-			        var tds = tr.cells;
-			      //  var price = parseFloat(tds[3].innerHTML);
-			        //var unitprice = parseFloat(tds[3].innerHTML);
-				    var unitprice = parseFloat(tr.getElementsByTagName('input')[2].value).toFixed(2);
-					var count = parseInt(tr.getElementsByTagName('input')[1].value);
-			        var SubTotal = parseFloat(unitprice * count);
-			      // document.getElementById('sub_Total').innerHTML = SubTotal.toFixed(2);
-			       tds[3].innerHTML = SubTotal.toFixed(2);
-			    }
-			
-			
-			
-			function add_prod(get){
-				 shop.name = get.getAttribute('pname');
-				 shop.pcode = get.getAttribute('pcode');
-				 shop.pqty = get.getAttribute('pqty');
-			     shop.price = get.getAttribute('price');
-			    console.log(JSON.stringify(shop));
-				totalPrice.push({ "name": get.getAttribute('pname'), "code":get.getAttribute('pcode'), "pqty":get.getAttribute('pqty'), "price": get.getAttribute('price')})
-				
-			    document.getElementById('display').innerHTML += "<tr class='on'><td><input class='check-one check' checked type='checkbox' pname='"+get.getAttribute('pname')+"' price='"+get.getAttribute('price')+"' pqty='"+get.getAttribute('pqty')+"' pcode='"+get.getAttribute('pcode')+"'  onclick='add_prod(this)'/>"+
-			    "</td>"+
-			        "<td>"+get.getAttribute("pname")+"</td>"+
-			        "<td class='count'><span class='reduce'></span><input class='count-input' type='text'  value='"+get.getAttribute('pqty')+"' /><span class='add'>+</span>"+
-			        "<input type='hidden' class='unit_price' value='"+get.getAttribute('price')+"'/></td>"+
-			        "<td class='price_total'>"+get.getAttribute('price')+"</td></tr>";
-				// no loop
-				document.getElementById('selectedTotal').innerHTML = totalPrice.length - parseInt(1);
-			    
-			    get.parentNode.removeChild(get);
-			  
-			
-			    
-				var totalAmount = JSON.stringify(totalPrice);
-				console.log(totalAmount);
-			 
-			
-					var selected = 0;
-			        var price = 0;
-			        var HTMLstr = '';
-			        for (var i = 0, len = tr.length; i < len; i++) {
-			           if (tr[i].getElementsByTagName('input')[0].checked) {
-						
-			            
-			                tr[i].className = 'on';
-							selected += parseInt(tr[i].getElementsByTagName('input')[1].value);
-							
-			                price += parseFloat(tr[i].cells[3].innerHTML);
-			            
-							document.getElementById("priceTotal").innerHTML = price.toFixed(2);
-						console.log(price);
-							
-			            }
-			            else {
-			                tr[i].className = '';
-						}
-					}
-			
-					
-				 for (var i = 0; i < tr.length; i++) {
-			        tr[i].onclick = function (e) {
-			            e = e || window.event;
-			            var el = e.srcElement;
-			            var cls = el.className;
-			            var input = this.getElementsByTagName('input')[1];
-			            var val = parseInt(input.value);
-			            var reduce = this.getElementsByTagName('span')[1];
-			            switch (cls) {
-			                case 'add':
-			                    input.value = val + 1;
-			                    reduce.innerHTML = '-';
-			                    getSubTotal(this);
-			                    break;
-			                case 'reduce':
-			                    if (val > 1) {
-			                        input.value = val - 1;
-			                    }
-			                    if (input.value <= 1) {
-			                        reduce.innerHTML = '';
-			                    }
-			                   getSubTotal(this);
-			                    break;
-			                case 'delete':
-			                    var conf = confirm('Delete?');
-			                    if (conf) {
-			                        this.parentNode.removeChild(this);
-			                    }
-			                    break
-			                default :
-			                    break;
-			            }
-			           getTotal();
-			        }
-			        tr[i].getElementsByTagName('input')[1].onkeyup = function () {
-			            var val = parseInt(this.value);
-			            var tr = this.parentNode.parentNode
-			            var reduce = tr.getElementsByTagName('span')[1];
-			            if (isNaN(val) || val < 1) {
-			                val = 1;
-			            }
-			            this.value = val;
-			            if (val <= 1) {
-			                reduce.innerHTML = '';
-			            }
-			            else {
-			                reduce.innerHTML = '-';
-			            }
-			           getSubTotal(tr);
-			           getTotal();
-			        }
-			    }
-			}
-			
-			 selected.onclick = function () {
-			        if (foot.className == 'foot') {
-			            if (selectedTotal.innerHTML != 0) {
-			                foot.className = 'foot show';
-			               
-			            }
-			        }
-			        else {
-			            foot.className = 'foot';
-			        }
-			    }
-			
-			  /*  selectedViewList.onclick = function (e) {
-			        e = e || window.event;
-			        var el = e.srcElement;
-			        if (el.className == 'del') {
-			            var index = el.getAttribute('index');
-			            var input = tr[index].getElementsByTagName('input')[0];
-			            input.checked = false;
-			            input.onclick();
-			           
-			                    
-			        }
-			    }
-			*/
-			
-			 
-			for(a = 0; a <= myObj.length - parseInt(1); a++ ){
-				
-			                                document.getElementById("storeFront").innerHTML += "<div  class='product-item-container'><table class='product-item'><tr class='on'> "+
-			            "<Td><h3>"+myObj[a].p_name+"</h3><h5>"+currency+ "<span class='unit_price'>"+myObj[a].p_price+"</span></h5>"+
-			              
-			                "<br><label class='btn'>Add to Cart &nbsp;<input class='check-one check' type='checkbox' pname='"+myObj[a].p_name+"' price='"+myObj[a].p_price+"' pqty='"+myObj[a].p_qty+"' pcode='"+myObj[a].p_code+"' id='row"+a+"'  onclick='add_prod(this)'/></label></td>"+
-							      "</tr></table></div>";
-				document.getElementById('currency').innerHTML = '$';	
-					
-			}
-			
-			function addQty(add){
-			var cur = document.getElementById('cur'+add+'').value;
-			var row = document.getElementById('row'+add+'');
-			row.setAttribute('pqty',cur);
-			}
-			
-			
-			
-			
-			    
-			    chkCode.onclick = function()
-			        {    
-			          
-			        var codeValue = document.getElementById('promoCode').value;
-			        if (codeValue === hasCode) {
-			           // alert(codeValue);
-			           sessionStorage.setItem('discountCode', hasCode);
-			           sessionStorage.setItem('discountValue', hasDiscount);
-			           //priceTotal = priceTotal - 10;
-			           alert('Code Verified! You got '+hasDiscount+'% Discount.');
-			           getTotal();
-			
-			        } else if (codeValue == '') {
-			            alert('Please key-in Promo Code');
-			            clearSession();
-			        
-			        } else {
-			            alert('Unverified Code');
-			            clearSession();
-			        }
-			        console.log(JSON.stringify(totalPrice));
-			       
-			       
-			    }
-			
-			    function clearSession(){
-			            sessionStorage.removeItem('discountCode');
-			            sessionStorage.removeItem('discountValue');
-			            sessionStorage.removeItem('discountInPercent');
-			
-			    }
-			     
-			    checkOut.onclick = function () {
-			             clearSession();
-			             window.location.reload();
-			    }
-			   
-			    
-			
-			
-			    clearSession();
-			
-			
-		</Script>
+<script src="js/shoppingcart.js"></script>		
+<script src="js/jquery-1.8.3.min.js"></script>
+<script src="js/rules.js"></script>
 	</body>
 </html>

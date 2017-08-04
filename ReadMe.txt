@@ -24,5 +24,7 @@ On this demo, it covers:
 - Class/Object Type of scripting
 - Promo Code “I<3AMAYSIM”
 - 10% Discount
-- Scenarios are not yet implemented on the script
+- 3 x Unlimited 1 GB  AND 1 x Unlimited 5 GB 
+- 2 x Unlimited 1 GB  AND  4 x Unlimited 5 GB 
+
 

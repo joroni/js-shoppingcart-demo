@@ -344,16 +344,20 @@ tr.on > td.count .reduce, tr.on > td.count .add, tr.on > td.count input.count-in
 
 .foot .total {
     min-width: 150px;
+    font-size: 1.2em;
+    font-family: "Roboto Condensed", sans-serif !important;
 }
 
-
+i.add, i.reduce {
+    font-style: normal;
+}
 .count {
     text-align: center;
 }
 
 .product-item-container {
     margin: 10px;
-    width:48%;
+    width:47%;
     float: left;
 }
 .product-item td {
@@ -367,25 +371,69 @@ tr.on > td.count .reduce, tr.on > td.count .add, tr.on > td.count input.count-in
     border: 0px solid #343434;
     background-color: #ccc;
     color: #fff;
+    cursor: pointer;
 }
+
+
+.lg {
+   font-size: 1em;
+   padding: 10px; 
+}
+
+.align-right {
+    float: right;
+}
+.orange { 
+    background-color: #f50;
+ color: #fff;
+ }
 
 input#row1{
  background-color: #f50;
  color: #f50;
  }
 
+.hidebox {
+    display: none;
+}
+ .center {
+     text-align: center;
+     margin: 0 auto;
+ }
 
+.green {
+    background: green !important;
+    color: #fff !important;
+}
+ table#cartTable {
+    border: 3px solid #ddd;
+    border-radius: 24px;
+    position: fixed;
+    top: 15%;
+    background: #fff;
+    width: 80%;
+    left: 12%;
+    z-index: 200;
+ }
  .row {
      margin-left: -10px;
      margin-right:-10px;
  }
 
+ 
+.modalContainer {
+    background: rgba(0,0,0,0.2);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
 
-
- @media only screen and (max-width: 1024px) {
+@media only screen and (max-width: 738px) {
     .product-item-container {
     margin: 10px 0;
     width:100%;
     float: left;
-}
+    }
 }
