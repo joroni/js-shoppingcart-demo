@@ -67,7 +67,7 @@ tbody tr:hover {
     font-weight: normal;
 }
 
-td.hidden {
+td.hidden, .hidden {
     display: none;
 }
 .count {
@@ -207,11 +207,12 @@ img {
     color: #666;
     
 }
-.foot .closing{
+.foot .closing {
     border-left: 1px solid #c8c8c8;
-    width: 100px;
+    min-width: 100px;
     text-align: center;
     color: #fff;
+    padding: 2px 10px;
     font-weight: bold;
     background: #f50;
     cursor: pointer;

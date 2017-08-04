@@ -26,5 +26,5 @@ On this demo, it covers:
 - 10% Discount
 - 3 x Unlimited 1 GB  AND 1 x Unlimited 5 GB 
 - 2 x Unlimited 1 GB  AND  4 x Unlimited 5 GB 
-
+- 1 x Unlimited 1 GB 2 X Unlimited 2 GB
 
